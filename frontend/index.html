@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALU Smart Learning & Skills Tracker</title>
+  <meta name="description" content="Track your academic progress, courses, skills, and goals at African Leadership University." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    window.addEventListener('error', function(event) {
+      console.error("🚨 GLOBAL ERROR:", event.message, "at", event.filename, ":", event.lineno);
+    });
+    window.addEventListener('unhandledrejection', function(event) {
+      console.error("🚨 UNHANDLED PROMISE REJECTION:", event.reason);
+    });
+  </script>
+
+  <!-- CDN Dependencies -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+  <script src="https://unpkg.com/recharts@2.12.7/umd/Recharts.js"></script>
+
+  <script type="text/babel" src="app.js"></script>
+</body>
+</html>
