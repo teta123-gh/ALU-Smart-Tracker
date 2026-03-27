@@ -8,8 +8,7 @@ from datetime import datetime, timedelta
 import bcrypt
 
 
-def seed():
-    app = create_app()
+def seed_data():
     with app.app_context():
         # Clear existing data
         db.drop_all()
@@ -152,4 +151,4 @@ def seed():
 
 
 if __name__ == '__main__':
-    seed()
+    seed_data()
