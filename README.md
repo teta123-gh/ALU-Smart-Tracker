@@ -88,3 +88,5 @@ You can log in to explore the dashboard using the following test account:
 You can log in to explore admin dashboard using the following test account:
 - **Email:** `admin@alu.edu`
 - **Password:** `admin1234`
+#### Deployment link 
+**https://alu-smart-tracker-1.onrender.com/**
