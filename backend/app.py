@@ -7,17 +7,21 @@ import os
 def create_app():
     app = Flask(__name__)
 
-    # Configuration
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///alu_tracker.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = 'alu-super-secret-jwt-key-2024'
-    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False  # No expiry for demo
-    # Extensions
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
+
     db.init_app(app)
     JWTManager(app)
-    CORS(app, resources={r"/api/*": {"origins": ["https://alu-smart-tracker.onrender.com"]}})
 
-    # Register Blueprints
+    # ✅ Fix: allow all origins explicitly, support credentials & preflight
+    CORS(app, 
+         origins=["https://alu-smart-tracker-1.onrender.com"],
+         supports_credentials=True,
+         allow_headers=["Content-Type", "Authorization"],
+         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
+
     from routes.auth import auth_bp
     from routes.courses import courses_bp
     from routes.activities import activities_bp
@@ -34,7 +38,6 @@ def create_app():
     app.register_blueprint(dashboard_bp, url_prefix='/api/dashboard')
     app.register_blueprint(admin_bp, url_prefix='/api/admin')
 
-        # Create Tables (without seeding!)
     with app.app_context():
         db.create_all()
 
