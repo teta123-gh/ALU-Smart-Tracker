@@ -16,8 +16,8 @@ def create_app():
     # Extensions
     db.init_app(app)
     JWTManager(app)
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
-
+    #CORS(app, resources={r"/api/*": {"origins": "*"}})
+    CORS(app, resources={r"/api/*": {"origins": ["https://alu-smart-tracker-1.onrender.com"]}})
     # Register blueprints
     from routes.auth import auth_bp
     from routes.courses import courses_bp
@@ -36,9 +36,15 @@ def create_app():
     app.register_blueprint(admin_bp, url_prefix='/api/admin')
 
     # Create tables
+    # with app.app_context():
+    #     db.create_all()
     with app.app_context():
-        db.create_all()
+    db.create_all()
 
+    # Seed database
+    from seed import seed_data
+    seed_data()
+    
     return app
 
 
