@@ -42,10 +42,7 @@ def create_app():
     # Create tables
     with app.app_context():
         db.create_all()
-
-        from seed import seed_data
-        seed_data()
-
+    
     return app
 
 
