@@ -39,11 +39,11 @@ def create_app():
     # with app.app_context():
     #     db.create_all()
     with app.app_context():
-    db.create_all()
+        db.create_all()
 
     # Seed database
-    from seed import seed_data
-    seed_data()
+        from seed import seed_data
+        seed_data()
     
     return app
 
