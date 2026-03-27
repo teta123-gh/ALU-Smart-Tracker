@@ -42,12 +42,15 @@ def create_app():
         db.create_all()
 
     # Seed database
-        from seed import seed_data
-        seed_data()
+        from seed import seed
+        seed()
     
-    return app
+        return app
+
+
+app = create_app()
 
 
 if __name__ == '__main__':
-    print("ALU Tracker API running on http://localhost:5000")
+    print("ALU Tracker API running on https://alu-smart-tracker-1.onrender.com")
     app.run(host="0.0.0.0", port=5000)
