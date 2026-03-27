@@ -2,7 +2,6 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from models import db
-import os
 
 def create_app():
     app = Flask(__name__)
@@ -11,13 +10,18 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///alu_tracker.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = 'alu-super-secret-jwt-key-2024'
-    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False  # No expiry for demo
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
 
     # Extensions
     db.init_app(app)
     JWTManager(app)
-    #CORS(app, resources={r"/api/*": {"origins": "*"}})
-    CORS(app, resources={r"/api/*": {"origins": ["https://alu-smart-tracker-1.onrender.com"]}})
+
+    CORS(app, resources={
+        r"/api/*": {
+            "origins": ["https://alu-smart-tracker-1.onrender.com"]
+        }
+    })
+
     # Register blueprints
     from routes.auth import auth_bp
     from routes.courses import courses_bp
@@ -36,21 +40,18 @@ def create_app():
     app.register_blueprint(admin_bp, url_prefix='/api/admin')
 
     # Create tables
-    # with app.app_context():
-    #     db.create_all()
     with app.app_context():
         db.create_all()
 
-    # Seed database
         from seed import seed
         seed()
-    
-        return app
+
+    return app
 
 
 app = create_app()
 
 
 if __name__ == '__main__':
-    print("ALU Tracker API running on https://alu-smart-tracker-1.onrender.com")
+    print("ALU Tracker API running on http://localhost:5000")
     app.run(host="0.0.0.0", port=5000)
