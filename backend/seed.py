@@ -2,10 +2,12 @@
 Seed the database with sample data for the ALU Tracker demo.
 Run: python seed.py
 """
-from app import create_app
+
 from models import db, User, Course, Enrollment, LearningActivity, Skill, Goal
 from datetime import datetime, timedelta
 import bcrypt
+from app import create_app
+app = create_app()
 
 
 def seed_data():
