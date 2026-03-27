@@ -9,7 +9,7 @@ const {
   PieChart, Pie, Cell, Legend
 } = window.Recharts || Recharts;
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://alu-smart-tracker.onrender.com';
 
 // ── API Helper ────────────────────────────────────────────
 const api = {
